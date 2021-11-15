@@ -1,0 +1,15 @@
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const cors = require('cors')
+const express = require('express')
+const logger = require('morgan')
+const PORT = process.env.PORT || 5000
+
+express()
+  .use(bodyParser.urlencoded({extended: true}))
+  .use(bodyParser.json())
+  .use(cookieParser())
+  .use(cors())
+  .use(logger('dev'))
+  .use('/api', require('./app/api'))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
